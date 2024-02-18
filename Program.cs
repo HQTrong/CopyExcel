@@ -46,8 +46,6 @@ class Program
                 oSheet.Name = sheetName;
                 CopyFormat(oSheet, excelApp, 12);
                 workbook.SaveAs(destinationFilePath);
-      
-
                 // Save changes and close Excel
                 workbook.Close();
                 excelApp.Quit();
@@ -55,12 +53,10 @@ class Program
             else
             {
                 workbook = excelApp.Workbooks.Open(destinationFilePath);
-
                 if (!SheetExists(workbook, sheetName))
                 {
                     Excel.Worksheet oSheet = (Excel.Worksheet)workbook.Sheets[1];
                     oSheet.Copy(After: workbook.Sheets[workbook.Sheets.Count]);
-
                     Excel.Worksheet newSheet = (Excel.Worksheet)workbook.Sheets[workbook.Sheets.Count];
                     newSheet.Name = sheetName;
                     CopyFormat(newSheet, excelApp, 12);
@@ -101,7 +97,6 @@ class Program
             Excel.Range targetRange = oSheet.Rows[6 + i];
             targetRange.PasteSpecial(Excel.XlPasteType.xlPasteFormats);
         }
-
         excelApp.CutCopyMode = 0;
     }
 }
